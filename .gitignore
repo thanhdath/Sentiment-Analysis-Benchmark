@@ -1,0 +1,8 @@
+.env/
+.vscode/
+*.zip
+data/
+models/
+__pycache__
+Twitter-Sentiment-Analysis-master/
+twitter_download/
