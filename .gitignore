@@ -4,5 +4,5 @@
 data/
 models/
 __pycache__
-Twitter-Sentiment-Analysis-master/
-twitter_download/
+.ipynb_checkpoints/
+Untitled*.ipynb
