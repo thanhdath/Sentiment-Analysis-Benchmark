@@ -118,7 +118,6 @@ for index in range(len(X_test)):
     )
     for w, s in [(feature_names[i], s) for (i, s) in tfidf_scores]:
         score_dict[len(X_train) + index][w] = s
-
 # Initialize word2vec_feature vector
 total_svm = 0
 
@@ -133,6 +132,8 @@ logreg.fit(X_train, y_train)
 etime = time.time()
 print(f"training time: {etime-stime:.3f}")
 
+import pickle as pkl
+pkl.dump({'model': logreg, 'vectorizer': vectorizer}, open('models/logistic_regressor_word2vec.pkl', 'wb'))
 
 result1 = logreg.predict(X_test)
 
