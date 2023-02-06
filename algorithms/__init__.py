@@ -3,6 +3,7 @@ from .linear_svm_word2vec import LinearSVMWord2Vec
 from .logistic_regressor_word2vec import LogisticRegressorWord2Vec
 from .bert import DocumentEmbedding
 from .naive_bayes import NaiveBayes
+from .random_forest import RandomForest
 
 
 def init_model(model_name):
