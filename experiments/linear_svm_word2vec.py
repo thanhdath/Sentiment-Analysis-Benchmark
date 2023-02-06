@@ -99,6 +99,13 @@ X_test = init_word2vec_features(X_test)
 svc_model = LinearSVC()
 svc_model.fit(X_train, y_train)
 
+import pickle as pkl
+
+pkl.dump(
+    {"model": svc_model},
+    open("models/linear_svm_word2vec.pkl", "wb"),
+)
+
 etime = time.time()
 
 print(f"training time: {etime-stime:.3f}")
