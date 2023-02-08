@@ -81,7 +81,7 @@ class LogisticRegressorWord2Vec:
         self.model.fit(train_vector, labels)
 
         if output_model_name is None:
-            output_model_name = f"linear_svm_tfidf-{time.time()}"
+            output_model_name = f"logistic_regressor_word2vec-{time.time()}"
 
         output_model_path = f"models/{output_model_name}"
 

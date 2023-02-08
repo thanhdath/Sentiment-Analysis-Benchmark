@@ -39,7 +39,7 @@ def init_trainer(model_name):
     elif model_name in ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]:
         model = LMForSequenceClassification(model_name, load_inference_model=False)
     elif model_name == "naive_bayes":
-        model = NaiveBayes(f"models/{model_name}.pkl")
+        model = NaiveBayes(f"models/{model_name}.pkl", load_inference_model=False)
     elif model_name == "random_forest":
         model = RandomForest(f"models/{model_name}.pkl")
     else:
