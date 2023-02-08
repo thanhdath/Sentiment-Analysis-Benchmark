@@ -27,11 +27,15 @@ def init_model(model_name):
 
 def init_trainer(model_name):
     if model_name == "linear_svm_tfidf":
-        model = LinearSVMTFIDF(f"models/{model_name}.pkl")
+        model = LinearSVMTFIDF(f"models/{model_name}.pkl", load_inference_model=False)
     elif model_name == "linear_svm_word2vec":
-        model = LinearSVMWord2Vec(f"models/{model_name}.pkl")
+        model = LinearSVMWord2Vec(
+            f"models/{model_name}.pkl", load_inference_model=False
+        )
     elif model_name == "logistic_regressor_word2vec":
-        model = LogisticRegressorWord2Vec(f"models/{model_name}.pkl")
+        model = LogisticRegressorWord2Vec(
+            f"models/{model_name}.pkl", load_inference_model=False
+        )
     elif model_name in ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]:
         model = LMForSequenceClassification(model_name, load_inference_model=False)
     elif model_name == "naive_bayes":
