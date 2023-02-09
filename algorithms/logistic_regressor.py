@@ -1,6 +1,6 @@
 import pickle as pkl
+from sklearn import linear_model
 import time
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     classification_report,
     f1_score,
@@ -11,8 +11,12 @@ from sklearn.metrics import (
 import dill
 
 
-class RandomForest:
-    def __init__(self, model_path, load_inference_model=True):
+class LogisticRegressor:
+    def __init__(
+        self,
+        model_path,
+        load_inference_model=True,
+    ):
         if load_inference_model:
             obj = pkl.load(open(model_path, "rb"))
             self.model = obj["model"]
@@ -20,11 +24,13 @@ class RandomForest:
             if "vectorizer" in obj:
                 self.vectorizer = obj["vectorizer"]
         else:
-            self.model = RandomForestClassifier(
-                n_estimators=100, max_depth=None, n_jobs=-1
-            )
+            self.model = linear_model.LogisticRegression(C=1e5)
 
         self.id2label = {0: "negative", 1: "neutral", 2: "positive"}
+
+    def predict(self, sentence_vector):
+        pred = self.model.predict([sentence_vector])[0]
+        return self.id2label[pred]
 
     def train(self, train_vector, labels):
         self.model.fit(train_vector, labels)
