@@ -30,7 +30,6 @@ def init_trainer(model_name):
             f"models/{model_name}.pkl", load_inference_model=False
         )
     elif model_name in ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]:
-        model_name = f"/home/datht17/huggingface/{model_name}"
         model = LMForSequenceClassification(model_name, load_inference_model=False)
     elif model_name == "naive_bayes":
         model = NaiveBayes(f"models/{model_name}.pkl", load_inference_model=False)
