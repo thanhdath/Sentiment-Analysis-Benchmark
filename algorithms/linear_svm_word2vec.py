@@ -61,7 +61,7 @@ class LinearSVMWord2Vec:
         texts = [x["text"] for x in train_data]
         labels = [x["label"] for x in train_data]
 
-        train_vector = self.init_word2vec_features(texts)
+        train_vector = [self.get_word2vec_feature(text) for text in texts]
         self.model.fit(train_vector, labels)
 
         if output_model_name is None:
@@ -80,7 +80,7 @@ class LinearSVMWord2Vec:
         texts = [x["text"] for x in test_data]
         y_test = [x["label"] for x in test_data]
 
-        test_vector = self.init_word2vec_features(texts)
+        test_vector = [self.get_word2vec_feature(text) for text in texts]
         result = self.model.predict(test_vector)
 
         acc = accuracy_score(y_test, result)
