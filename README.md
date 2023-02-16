@@ -8,7 +8,7 @@ pip install -r requirements.txt
 
 ## Training and Evaluate
 
-Check the notebook TrainingAndEvaluate.ipynb
+See the notebook TrainingAndEvaluate.ipynb.
 
 **Data format**: train and test file in csv format, each file must contain 3 columns: tweet_id, label and text (see example in TrainingAndEvalute.ipynb).
 
