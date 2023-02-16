@@ -1,4 +1,4 @@
-# Sentiment-Analysis-Benchmark
+# Sentiment Analysis Benchmark
 
 ## Setup environment
 ```
