@@ -4,7 +4,7 @@ from nltk.corpus import stopwords
 import string
 import fasttext
 
-from vectorizers import Vectorizer
+from .vectorizer import Vectorizer
 
 class Word2VecVectorizer(Vectorizer):
     def __init__(self, fasttext_wv_path="models/cc.en.300.bin", fasttext_wv_dim=300):

@@ -1,4 +1,5 @@
 from .word2vec_vectorizer import Word2VecVectorizer
+from .vectorizer import Vectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -18,9 +19,3 @@ def init_vectorizer(name):
 
     return vectorizer
 
-class Vectorizer():
-    def fit(self, train_data):
-        pass
-
-    def transform(self, data):
-        return data

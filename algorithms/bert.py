@@ -116,7 +116,10 @@ class LMForSequenceClassification:
             data_collator=self.data_collator,
         )
 
+        stime = time.time()
         result = trainer.predict(tokenized_test_data)
+        inference_time = time.time() - stime
+
         result = result.predictions.argmax(axis=1)
 
         y_test = [x["label"] for x in tokenized_test_data]
@@ -143,3 +146,14 @@ class LMForSequenceClassification:
                 target_names=[self.id2label[x] for x in range(len(self.id2label))],
             )
         )
+
+        return {
+            "acc": acc,
+            "p_micro": p_micro,
+            "p_macro": p_macro,
+            "r_micro": r_micro,
+            "r_macro": r_macro,
+            "f1_micro": f1_micro,
+            "f1_macro": f1_macro,
+            "inference_time": inference_time
+        }
