@@ -9,6 +9,7 @@ from sklearn.metrics import (
     recall_score,
 )
 import dill
+import os
 
 
 class RandomForest:
@@ -34,6 +35,7 @@ class RandomForest:
             output_model_name = f"linear_svm_tfidf-{time.time()}"
 
         output_model_path = f"models/{output_model_name}"
+        os.makedirs("models/", exist_ok=True)
 
         if dill.pickles(vectorizer):
             save_data = {"model": self.model, "vectorizer": vectorizer}

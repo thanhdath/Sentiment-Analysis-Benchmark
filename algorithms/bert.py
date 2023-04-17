@@ -15,6 +15,7 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
 )
+import os
 
 
 class LMForSequenceClassification:
@@ -61,7 +62,10 @@ class LMForSequenceClassification:
         train_data: list of [{'text', 'label_number'}]
         device: e.g. cuda:0, cpu, cuda:1
         """
-        train_data = [{'text': text, 'label': label} for text, label in zip(train_texts, train_labels)]
+        train_data = [
+            {"text": text, "label": label}
+            for text, label in zip(train_texts, train_labels)
+        ]
 
         train_data = Dataset.from_list(train_data)
 
@@ -96,12 +100,16 @@ class LMForSequenceClassification:
             output_model_name = f"{self.model_name}-{time.time()}"
 
         output_model_path = f"models/{output_model_name}"
+        os.makedirs("models/", exist_ok=True)
         self.trainer.save_model(output_model_path)
 
         print(f"Model has been saved to {output_model_path}")
 
     def evaluate(self, test_texts, test_labels):
-        test_data = [{'text': text, 'label': label} for text, label in zip(test_texts, test_labels)]
+        test_data = [
+            {"text": text, "label": label}
+            for text, label in zip(test_texts, test_labels)
+        ]
         test_data = Dataset.from_list(test_data)
         tokenized_test_data = test_data.map(self.preprocess_function, batched=True)
 
@@ -155,5 +163,5 @@ class LMForSequenceClassification:
             "r_macro": r_macro,
             "f1_micro": f1_micro,
             "f1_macro": f1_macro,
-            "inference_time": inference_time
+            "inference_time": inference_time,
         }

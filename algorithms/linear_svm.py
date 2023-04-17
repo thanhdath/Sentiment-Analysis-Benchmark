@@ -9,6 +9,7 @@ import time
 import pickle as pkl
 from sklearn.svm import LinearSVC
 import dill
+import os
 
 
 class LinearSVM:
@@ -36,6 +37,7 @@ class LinearSVM:
             output_model_name = f"linear_svm_tfidf-{time.time()}"
 
         output_model_path = f"models/{output_model_name}"
+        os.makedirs("models/", exist_ok=True)
 
         if dill.pickles(vectorizer):
             save_data = {"model": self.model, "vectorizer": vectorizer}
@@ -84,5 +86,5 @@ class LinearSVM:
             "r_macro": r_macro,
             "f1_micro": f1_micro,
             "f1_macro": f1_macro,
-            "inference_time": inference_time
+            "inference_time": inference_time,
         }
