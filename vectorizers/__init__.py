@@ -11,7 +11,16 @@ def init_vectorizer(name):
         vectorizer = Word2VecVectorizer()
     elif name == "bow":
         vectorizer = CountVectorizer(ngram_range=(1, 2))  # Unigram and Bigram
+    elif name == "pass":
+        vectorizer = Vectorizer() # just an abstract class that doesn't do anything
     else:
         raise NotImplementedError()
 
     return vectorizer
+
+class Vectorizer():
+    def fit(self, train_data):
+        pass
+
+    def transform(self, data):
+        return data

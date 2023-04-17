@@ -4,8 +4,9 @@ from nltk.corpus import stopwords
 import string
 import fasttext
 
+from vectorizers import Vectorizer
 
-class Word2VecVectorizer:
+class Word2VecVectorizer(Vectorizer):
     def __init__(self, fasttext_wv_path="models/cc.en.300.bin", fasttext_wv_dim=300):
         self.tweet_tokenizer = TweetTokenizer()
         self.stopwords = set(stopwords.words("english"))
@@ -28,9 +29,6 @@ class Word2VecVectorizer:
         ]
         sentence = " ".join(words)
         return sentence
-
-    def fit(self, train_texts):
-        pass
 
     def transform(self, texts):
         vector = [self.get_word2vec_feature(text) for text in texts]
