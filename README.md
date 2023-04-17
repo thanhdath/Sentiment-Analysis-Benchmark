@@ -27,3 +27,6 @@ See the notebook TrainingAndEvaluate.ipynb.
   + bert-base-uncased.
   + roberta-base.
   + ... any other language model which is available on HuggingFace (https://huggingface.co/models).
+
+## Google Colab Version
+Instead of setting up the repository in your local machine, you can also use the code on Google Colab, see [Demo](https://colab.research.google.com/drive/14gIeVL9gcO7MdxMbmH5JZfSNwfeR5cjj?usp=sharing).
