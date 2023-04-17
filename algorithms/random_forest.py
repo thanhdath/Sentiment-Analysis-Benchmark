@@ -39,15 +39,19 @@ class RandomForest:
             save_data = {"model": self.model, "vectorizer": vectorizer}
         else:
             save_data = {"model": self.model}
-        pkl.dump(
-            save_data,
-            open(output_model_path, "wb"),
-        )
+
+        with open(output_model_path, "wb") as fp:
+            pkl.dump(
+                save_data,
+                fp,
+            )
 
         print(f"Model has been saved to {output_model_path}")
 
     def evaluate(self, test_vector, labels):
+        stime = time.time()
         result = self.model.predict(test_vector)
+        inference_time = time.time() - stime
 
         acc = accuracy_score(labels, result)
         print(f"Accuracy: micro: {acc:.3f}")
@@ -69,3 +73,14 @@ class RandomForest:
                 labels, result, target_names=["negative", "neutral", "positive"]
             )
         )
+
+        return {
+            "acc": acc,
+            "p_micro": p_micro,
+            "p_macro": p_macro,
+            "r_micro": r_micro,
+            "r_macro": r_macro,
+            "f1_micro": f1_micro,
+            "f1_macro": f1_macro,
+            "inference_time": inference_time,
+        }

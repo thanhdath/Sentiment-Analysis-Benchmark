@@ -1,4 +1,5 @@
 from .word2vec_vectorizer import Word2VecVectorizer
+from .vectorizer import Vectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -11,7 +12,10 @@ def init_vectorizer(name):
         vectorizer = Word2VecVectorizer()
     elif name == "bow":
         vectorizer = CountVectorizer(ngram_range=(1, 2))  # Unigram and Bigram
+    elif name == "pass":
+        vectorizer = Vectorizer() # just an abstract class that doesn't do anything
     else:
         raise NotImplementedError()
 
     return vectorizer
+

@@ -44,10 +44,6 @@ gensim==4.2.0
 huggingface-hub==0.12.0
 idna==3.4
 importlib-metadata==4.12.0
-intel-cmplr-lib-rt==2023.0.0
-intel-cmplr-lic-rt==2023.0.0
-intel-opencl-rt==2023.0.0
-intel-openmp==2023.0.0
 ipykernel==6.15.3
 ipython==8.5.0
 ipython-genutils==0.2.0

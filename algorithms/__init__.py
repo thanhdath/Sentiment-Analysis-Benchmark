@@ -6,9 +6,9 @@ from .random_forest import RandomForest
 
 
 def init_model(model_name):
-    if model_name == "linear_svm_tfidf":
+    if model_name == "linear_svm":
         model = LinearSVM(f"models/{model_name}.pkl")
-    elif model_name == "logistic_regressor_word2vec":
+    elif model_name == "logistic_regressor":
         model = LogisticRegressor(f"models/{model_name}.pkl")
     elif model_name in ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]:
         model = LMForSequenceClassification(model_name)
@@ -23,9 +23,9 @@ def init_model(model_name):
 
 
 def init_trainer(model_name):
-    if model_name == "linear_svm_tfidf":
+    if model_name == "linear_svm":
         model = LinearSVM(f"models/{model_name}.pkl", load_inference_model=False)
-    elif model_name == "logistic_regressor_word2vec":
+    elif model_name == "logistic_regressor":
         model = LogisticRegressor(
             f"models/{model_name}.pkl", load_inference_model=False
         )

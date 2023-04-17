@@ -56,11 +56,12 @@ class LMForSequenceClassification:
     def preprocess_function(self, examples):
         return self.tokenizer(examples["text"], truncation=True)
 
-    def train(self, train_data, device=None, output_model_name=None):
+    def train(self, train_texts, train_labels, device=None, output_model_name=None):
         """
         train_data: list of [{'text', 'label_number'}]
         device: e.g. cuda:0, cpu, cuda:1
         """
+        train_data = [{'text': text, 'label': label} for text, label in zip(train_texts, train_labels)]
 
         train_data = Dataset.from_list(train_data)
 
@@ -80,7 +81,7 @@ class LMForSequenceClassification:
             weight_decay=0.01,
         )
 
-        trainer = Trainer(
+        self.trainer = Trainer(
             model=model,
             args=training_args,
             train_dataset=tokenized_train_data,
@@ -88,17 +89,19 @@ class LMForSequenceClassification:
             data_collator=self.data_collator,
         )
 
-        trainer.train()
+        self.trainer.train()
 
+    def save_model(self, output_model_name, **kwargs):
         if output_model_name is None:
             output_model_name = f"{self.model_name}-{time.time()}"
 
         output_model_path = f"models/{output_model_name}"
-        trainer.save_model(output_model_path)
+        self.trainer.save_model(output_model_path)
 
         print(f"Model has been saved to {output_model_path}")
 
-    def evaluate(self, test_data):
+    def evaluate(self, test_texts, test_labels):
+        test_data = [{'text': text, 'label': label} for text, label in zip(test_texts, test_labels)]
         test_data = Dataset.from_list(test_data)
         tokenized_test_data = test_data.map(self.preprocess_function, batched=True)
 
@@ -113,7 +116,10 @@ class LMForSequenceClassification:
             data_collator=self.data_collator,
         )
 
+        stime = time.time()
         result = trainer.predict(tokenized_test_data)
+        inference_time = time.time() - stime
+
         result = result.predictions.argmax(axis=1)
 
         y_test = [x["label"] for x in tokenized_test_data]
@@ -140,3 +146,14 @@ class LMForSequenceClassification:
                 target_names=[self.id2label[x] for x in range(len(self.id2label))],
             )
         )
+
+        return {
+            "acc": acc,
+            "p_micro": p_micro,
+            "p_macro": p_macro,
+            "r_micro": r_micro,
+            "r_macro": r_macro,
+            "f1_micro": f1_micro,
+            "f1_macro": f1_macro,
+            "inference_time": inference_time
+        }
