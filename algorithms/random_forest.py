@@ -39,7 +39,7 @@ class RandomForest:
             save_data = {"model": self.model, "vectorizer": vectorizer}
         else:
             save_data = {"model": self.model}
-        
+
         with open(output_model_path, "wb") as fp:
             pkl.dump(
                 save_data,
@@ -82,6 +82,5 @@ class RandomForest:
             "r_macro": r_macro,
             "f1_micro": f1_micro,
             "f1_macro": f1_macro,
-            "inference_time": inference_time
+            "inference_time": inference_time,
         }
-    
