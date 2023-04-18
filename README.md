@@ -2,7 +2,7 @@
 
 ## Setup environment
 ```
-conda create -p .env/ python=3.9
+conda create -p .env/ python=3.10
 pip install -r requirements.txt
 ```
 
