@@ -83,6 +83,7 @@ class LMForSequenceClassification:
             per_device_eval_batch_size=1,
             num_train_epochs=5,
             weight_decay=0.01,
+            save_strategy="epoch"
         )
 
         self.trainer = Trainer(
