@@ -57,7 +57,8 @@ class LMForSequenceClassification:
     def preprocess_function(self, examples):
         return self.tokenizer(examples["text"], truncation=True)
 
-    def train(self, train_texts, train_labels, device=None, output_model_name=None):
+    def train(self, train_texts, train_labels, device=None, output_model_name=None, 
+              batch_size=16, gradient_accumulation_steps=1):
         """
         train_data: list of [{'text', 'label_number'}]
         device: e.g. cuda:0, cpu, cuda:1
@@ -79,8 +80,9 @@ class LMForSequenceClassification:
         training_args = TrainingArguments(
             output_dir="./results",
             learning_rate=2e-5,
-            per_device_train_batch_size=16,
+            per_device_train_batch_size=batch_size,
             per_device_eval_batch_size=1,
+            gradient_accumulation_steps=gradient_accumulation_steps,
             num_train_epochs=5,
             weight_decay=0.01,
             save_strategy="epoch"
