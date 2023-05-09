@@ -58,7 +58,7 @@ class LMForSequenceClassification:
         return self.tokenizer(examples["text"], truncation=True)
 
     def train(self, train_texts, train_labels, device=None, output_model_name=None, 
-              epochs=5, batch_size=16, gradient_accumulation_steps=1):
+              epochs=3, batch_size=16, gradient_accumulation_steps=4):
         """
         train_data: list of [{'text', 'label_number'}]
         device: e.g. cuda:0, cpu, cuda:1
