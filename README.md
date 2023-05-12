@@ -30,3 +30,5 @@ See the notebook TrainingAndEvaluate.ipynb.
 
 ## Google Colab Version
 Instead of setting up the repository in your local machine, you can also use the code on Google Colab, see [Demo](https://colab.research.google.com/drive/14gIeVL9gcO7MdxMbmH5JZfSNwfeR5cjj?usp=sharing).
+
+Training RoBERTa model for Sentiment Analysis: https://colab.research.google.com/drive/1ZNe56SRCHTm5iBOusZKSjAN0ZLT60Udw?usp=sharing
